@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Account Tasks - Excel Download</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #232F3E 0%, #FF9900 100%);
+            padding: 30px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #232F3E;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+        .download-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: #FF9900;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 6px 20px rgba(255,153,0,0.4);
+            margin: 0 10px;
+        }
+        .download-btn:hover {
+            background: #232F3E;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(35,47,62,0.5);
+        }
+        .section-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #FF9900;
+        }
+        .section h2 {
+            color: #232F3E;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-bottom: 2px solid #FF9900;
+            padding-bottom: 10px;
+        }
+        .task-list {
+            list-style: none;
+        }
+        .task-item {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #4CAF50;
+            display: flex;
+            align-items: flex-start;
+            transition: all 0.2s;
+        }
+        .task-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .task-number {
+            background: #FF9900;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .task-text {
+            color: #333;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #856404;
+        }
+        @media (max-width: 968px) {
+            .section-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Amazon Accounts Management Tasks</h1>
+        
+        <div class="download-section">
+            <button class="download-btn" onclick="downloadExcel()">⬇️ Download Complete Excel File</button>
+        </div>
+
+        <div class="section-container">
+            <div class="section">
+                <h2>Main Responsibilities</h2>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <div class="task-number">1</div>
+                        <div class="task-text">
+                            <strong>Account Mail Check</strong><br>
+                            Check and respond to all account-related emails daily
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">2</div>
+                        <div class="task-text">
+                            <strong>Account Health and Performance Check</strong><br>
+                            Monitor: ODR, Late Shipment Rate, Valid Tracking Rate, Cancel Rate, Invoice Rate, A-Z Claims, Chargeback Claims
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">3</div>
+                        <div class="task-text">
+                            <strong>Policy Compliance & Manage Feedback</strong><br>
+                            Address any violations, respond to negative feedback
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">4</div>
+                        <div class="task-text">
+                            <strong>Case Log Check</strong><br>
+                            Review and respond to all case logs and seller support cases
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">5</div>
+                        <div class="task-text">
+                            <strong>Order Processing - Manage Orders</strong><br>
+                            Cancel orders, unshipped orders tracking
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">6</div>
+                        <div class="task-text">
+                            <strong>Monitor Stock Levels</strong><br>
+                            Check inventory daily, prevent stockouts
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">7</div>
+                        <div class="task-text">
+                            <strong>Performance Notification Alert Check</strong><br>
+                            Check and respond to all performance notifications and alerts
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">8</div>
+                        <div class="task-text">
+                            <strong>Pricing Strategy</strong><br>
+                            Adjust price based on competition, maintain Buy Box eligibility
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">9</div>
+                        <div class="task-text">
+                            <strong>Track Payment & Manage Cost</strong><br>
+                            Reconcile payments, cost tracking
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>New Skill Learning</h2>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <div class="task-number">1</div>
+                        <div class="task-text">
+                            <strong>SEO and Keyword Research</strong><br>
+                            <span class="highlight">Helium 10, Cerebro</span> for finding high volume keywords
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">2</div>
+                        <div class="task-text">
+                            <strong>Data Analysis</strong><br>
+                            Excel or Google Sheet for sales tracking
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">3</div>
+                        <div class="task-text">
+                            <strong>Image Editing Ideas</strong><br>
+                            Amazon guy videos - product photography skills
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">4</div>
+                        <div class="task-text">
+                            <strong>Creative Studio - Image Generation</strong><br>
+                            Use AI tools to generate product images, infographics, lifestyle shots
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">5</div>
+                        <div class="task-text">
+                            <strong>Creative Studio - Video Generation</strong><br>
+                            Create product videos, demo videos using AI tools
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">6</div>
+                        <div class="task-text">
+                            <strong>Competitor Analysis</strong><br>
+                            Pricing strategies, review mining, market gap identification
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">7</div>
+                        <div class="task-text">
+                            <strong>International Expansion</strong><br>
+                            Multi marketplace selling, global logistics
+                        </div>
+                    </li>
+                </ul>
+
+                <h2 style="margin-top: 30px;">Tools to Master</h2>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <div class="task-number">•</div>
+                        <div class="task-text">
+                            <strong>Helium 10</strong> - Research
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">•</div>
+                        <div class="task-text">
+                            <strong>AMZScout</strong> - Product tracking
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">•</div>
+                        <div class="task-text">
+                            <strong>Keepa</strong> - Price history
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">•</div>
+                        <div class="task-text">
+                            <strong>Seller App</strong> - Optimization
+                        </div>
+                    </li>
+                    <li class="task-item">
+                        <div class="task-number">•</div>
+                        <div class="task-text">
+                            <strong>Tool4Seller</strong> - Amazon seller analytics
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function downloadExcel() {
+            // Sheet 1: Main Responsibilities
+            const responsibilities = [
+                ["No", "Date", "Main Responsibilities", "Details", "Status", "Notes"],
+                ["", "", "", "", "", ""],
+                [1, "", "Account Mail Check", "Check and respond to all account-related emails daily", "Pending", ""],
+                [2, "", "Account Health and Performance Check", "Monitor: ODR, Late Shipment Rate, Valid Tracking Rate, Cancel Rate, Invoice Rate, A-Z Claims, Chargeback Claims", "Pending", ""],
+                [3, "", "Policy Compliance & Manage Feedback", "Address any violations, respond to negative feedback", "Pending", ""],
+                [4, "", "Case Log Check", "Review and respond to all case logs and seller support cases", "Pending", ""],
+                [5, "", "Order Processing - Manage Orders", "Cancel orders, unshipped orders tracking", "Pending", ""],
+                [6, "", "Monitor Stock Levels", "Check inventory daily, prevent stockouts", "Pending", ""],
+                [7, "", "Performance Notification Alert Check", "Check and respond to all performance notifications and alerts", "Pending", ""],
+                [8, "", "Pricing Strategy", "Adjust price based on competition, maintain Buy Box eligibility", "Pending", ""],
+                [9, "", "Track Payment & Manage Cost", "Reconcile payments, cost tracking", "Pending", ""]
+            ];
+
+            // Sheet 2: New Skill Learning
+            const skills = [
+                ["No", "Date", "New Skill Learning", "Tools/Methods", "Progress", "Notes"],
+                ["", "", "", "", "", ""],
+                [1, "", "SEO and Keyword Research", "Helium 10, Cerebro for finding high volume keywords", "", ""],
+                [2, "", "Data Analysis", "Excel or Google Sheet for sales tracking", "", ""],
+                [3, "", "Image Editing Ideas", "Amazon guy videos - product photography skills", "", ""],
+                [4, "", "Creative Studio - Image Generation", "Use AI tools to generate product images, infographics, lifestyle shots", "", ""],
+                [5, "", "Creative Studio - Video Generation", "Create product videos, demo videos using AI tools", "", ""],
+                [6, "", "Competitor Analysis", "Pricing strategies, review mining, market gap identification", "", ""],
+                [7, "", "International Expansion", "Multi marketplace selling, global logistics", "", ""]
+            ];
+
+            // Sheet 3: Tools to Master
+            const tools = [
+                ["No", "Date", "Tool Name", "Purpose", "Learning Status", "Notes"],
+                ["", "", "", "", "", ""],
+                [1, "", "Helium 10", "Research", "", ""],
+                [2, "", "AMZScout", "Product tracking", "", ""],
+                [3, "", "Keepa", "Price history", "", ""],
+                [4, "", "Seller App", "Optimization", "", ""],
+                [5, "", "Tool4Seller", "Amazon seller analytics", "", ""]
+            ];
+
+            // Create workbook
+            const wb = XLSX.utils.book_new();
+
+            // Add Main Responsibilities sheet
+            const ws1 = XLSX.utils.aoa_to_sheet(responsibilities);
+            ws1['!cols'] = [
+                { wch: 5 },
+                { wch: 12 },
+                { wch: 35 },
+                { wch: 50 },
+                { wch: 12 },
+                { wch: 25 }
+            ];
+            XLSX.utils.book_append_sheet(wb, ws1, "Main Responsibilities");
+
+            // Add Skills sheet
+            const ws2 = XLSX.utils.aoa_to_sheet(skills);
+            ws2['!cols'] = [
+                { wch: 5 },
+                { wch: 12 },
+                { wch: 30 },
+                { wch: 50 },
+                { wch: 12 },
+                { wch: 25 }
+            ];
+            XLSX.utils.book_append_sheet(wb, ws2, "New Skill Learning");
+
+            // Add Tools sheet
+            const ws3 = XLSX.utils.aoa_to_sheet(tools);
+            ws3['!cols'] = [
+                { wch: 5 },
+                { wch: 12 },
+                { wch: 20 },
+                { wch: 35 },
+                { wch: 15 },
+                { wch: 25 }
+            ];
+            XLSX.utils.book_append_sheet(wb, ws3, "Tools to Master");
+
+            // Download
+            XLSX.writeFile(wb, "Amazon_Account_Tasks.xlsx");
+        }
+    </script>
+</body>
+</html>
